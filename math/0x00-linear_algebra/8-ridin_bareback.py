@@ -9,7 +9,7 @@ def mat_mul(mat1, mat2):
               [0, 0, 0, 0],
               [0, 0, 0, 0]]
 
-    if len(mat2) > len(mat1):
+    if len(mat1[0]) != len(mat2):
         return None
 
     for i in range(len(mat1)):
