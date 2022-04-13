@@ -3,6 +3,7 @@
 
 
 def add_matrices2D(mat1, mat2):
+    '''Function adds two matrices element-wise'''
 
     if len(mat1[0]) != len(mat2[0]):
         return None

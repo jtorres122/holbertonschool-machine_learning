@@ -3,6 +3,7 @@
 
 
 def matrix_shape(matrix):
+    '''Function calculates the shape of a matrix'''
 
     return [len(matrix)] + matrix_shape(matrix[0])\
             if(type(matrix) == list) else []
