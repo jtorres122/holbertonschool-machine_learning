@@ -6,8 +6,8 @@ def mat_mul(mat1, mat2):
     '''Function performs matrix multiplication'''
 
     result = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]]
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]]
 
     for i in range(len(mat1)):
         for j in range(len(mat2[0])):
