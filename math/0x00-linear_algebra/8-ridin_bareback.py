@@ -5,9 +5,7 @@
 def mat_mul(mat1, mat2):
     '''Function performs matrix multiplication'''
 
-    result = [[0, 0, 0, 0],
-              [0, 0, 0, 0],
-              [0, 0, 0, 0]]
+    result = [[0 for row in range(len(mat2[0]))] for col in range(len(mat1))]
 
     for i in range(len(mat1)):
         if len(mat1[i]) != len(mat2):
