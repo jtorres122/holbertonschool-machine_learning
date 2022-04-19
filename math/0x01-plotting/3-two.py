@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+'''Mpdule shows two line graphs as a comparison'''
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+'''Module shows a line graph with title and labels'''
 import numpy as np
 import matplotlib.pyplot as plt
 
