@@ -9,7 +9,7 @@ def summation_i_squared(n):
     task asks for NoneType to be returned
     '''
 
-    if isinstance(n, int) is False:
+    if isinstance(n, int) is False or n <= 0:
         return None
 
     return (n * (n + 1) * (2 * n + 1)) / 6
