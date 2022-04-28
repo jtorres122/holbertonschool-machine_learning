@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-'''
-Module contains a method that performs matrix multiplication'''
+'''Module contains a method that performs matrix multiplication'''
 import numpy as np
 
 
