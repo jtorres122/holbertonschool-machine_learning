@@ -21,24 +21,24 @@ class Poisson:
                 raise ValueError('data must contain multiple values')
             self.lambtha = sum(data) / len(data)
 
-    # def pmf(self, k):
-    #     '''
-    #     Method calculates the value of the PMF
-    #     for a given number of “successes”
-    #     '''
-    #     if isinstance(k, int) is False:
-    #         self.k = int(k)
-    #     if k < 0:
-    #         return 0
-    #     return
+    def pmf(self, k):
+        '''
+        Method calculates the value of the PMF
+        for a given number of “successes”
+        '''
+        if isinstance(k, int) is False:
+            self.k = int(k)
+        if k < 0:
+            return 0
+        return
 
-    # def cdf(self, k):
-    #     '''
-    #     Method calculates the value of the CDF
-    #     for a given number of “successes”
-    #     '''
-    #     if isinstance(k, int) is False:
-    #         self.k = int(k)
-    #     if k < 0:
-    #         return 0
-    #     return
+    def cdf(self, k):
+        '''
+        Method calculates the value of the CDF
+        for a given number of “successes”
+        '''
+        if isinstance(k, int) is False:
+            self.k = int(k)
+        if k < 0:
+            return 0
+        return
