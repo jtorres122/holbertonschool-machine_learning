@@ -22,7 +22,7 @@ class Binomial:
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             mean = sum(data) / len(data)
-            variance =  sum((i - mean) ** 2 for i in data)/ len(data)
+            variance = sum((i - mean) ** 2 for i in data) / len(data)
             self.p = - (variance / mean) + 1
             self.n = round(mean / self.p)
             self.p = mean / self.n
