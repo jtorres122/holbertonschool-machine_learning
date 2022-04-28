@@ -25,4 +25,4 @@ class Binomial:
             variance = sum((i - mean) ** 2 for i in data) / len(data)
             self.p = - (variance / mean) + 1
             self.n = round(mean / self.p)
-            self.p = mean / self.n
+            self.p = float(mean / self.n)
