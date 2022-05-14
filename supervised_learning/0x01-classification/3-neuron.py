@@ -36,7 +36,7 @@ class Neuron:
         Method calculates forward propagation
         of a neuron
         '''
-        mul = np.matmul(self.__W, X)
+        mul = np.matmul(self.__W, X) + self.__b
         self.__A = 1 / (1 + np.exp(-mul))
         return self.__A
 
