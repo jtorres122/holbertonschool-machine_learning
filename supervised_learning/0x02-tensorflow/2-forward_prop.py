@@ -13,5 +13,4 @@ def forward_prop(x, layer_sizes=[], activations=[]):
         layer = tf.layers.Dense(units=layer_sizes[i],
                                 activation=activations[i],
                                 kernel_initializer=init)
-        prev = layer(x)
-    return prev
+    return layer(x)
