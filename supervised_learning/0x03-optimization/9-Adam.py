@@ -3,7 +3,7 @@
 
 
 def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
-    '''Function that updates the variables using the Adam optimization algorithm'''
+    '''Function that updates the variables using the Adam optimization algo'''
     v_t = beta1 * v + (1 - beta1) * grad
     s_t = beta2 * s + (1 - beta2) * grad * grad
     v_corr = v_t / (1 - beta1 ** t)
