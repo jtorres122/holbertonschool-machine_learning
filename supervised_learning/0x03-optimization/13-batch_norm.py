@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''Module contains the batch_norm function'''
-import tensorflow.compat.v1 as tf
+import numpy as np
 
 
 def batch_norm(Z, beta, gamma, epsilon):
