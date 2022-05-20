@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 '''Module contains update_variables_RMSProp function'''
+import tensorflow.compat.v1 as tf
 
 
 def update_variables_RMSProp(alpha, beta2, epsilon, var, grad, s):
