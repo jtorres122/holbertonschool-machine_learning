@@ -10,4 +10,4 @@ def batch_norm(Z, beta, gamma, epsilon):
     '''
     batch_mean = np.mean(Z, axis=0)
     batch_var = np.var(Z, axis=0)
-    return (Z - batch_mean) / np.sqrt(batch_var + epsilon) * gamma + beta
+    return ((Z - batch_mean) / np.sqrt(batch_var + epsilon)) * gamma + beta
