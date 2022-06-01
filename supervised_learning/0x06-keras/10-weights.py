@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''Module contains save_model and load_model functions'''
+'''Module contains save_weights and load_weights functions'''
 import tensorflow.keras as K
 
 
