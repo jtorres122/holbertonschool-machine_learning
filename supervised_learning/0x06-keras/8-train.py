@@ -12,10 +12,9 @@ def train_model(network, data, labels, batch_size, epochs,
     Function trains a model using mini-batch gradient descent,
     also save the best iteration of the model
     '''
-    if early_stopping is True and validation_data:
-        early_stopping_monitor = K.callbacks.EarlyStopping(
-                monitor='val_loss', patience=patience)
-        callback = [early_stopping_monitor]
+    early_stopping_monitor = K.callbacks.EarlyStopping(
+            monitor='val_loss', patience=patience)
+    callback = [early_stopping_monitor]
 
     if validation_data and learning_rate_decay:
         lr_decay = K.callbacks.LearningRateScheduler(
