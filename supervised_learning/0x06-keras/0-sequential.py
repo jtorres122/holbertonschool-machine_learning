@@ -4,7 +4,10 @@ import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
-    '''Function builds a neural network with the Keras library'''
+    '''
+    Function builds a neural network with the Keras library
+    using the sequential class
+    '''
     model = K.Sequential()
     regularizer = K.regularizers.l2(lambtha)
     for i in range(len(layers)):
