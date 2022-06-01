@@ -13,7 +13,7 @@ def train_model(network, data, labels, batch_size, epochs,
     also save the best iteration of the model
     '''
     early_stopping_monitor = K.callbacks.EarlyStopping(
-            monitor='val_loss', patience=patience)
+            monitor='val_loss', patience=patience, mode='min')
     callback = [early_stopping_monitor]
 
     if validation_data and learning_rate_decay:
