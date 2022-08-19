@@ -40,7 +40,8 @@ class Neuron:
     def cost(self, Y, A):
         '''Calculates the cost of the model using logistic regression'''
         m = Y.shape[1]
-        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * (np.log(1.0000001 - A)))
+        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y)
+                               * (np.log(1.0000001 - A)))
         return cost
 
     def evaluate(self, X, Y):
@@ -48,4 +49,3 @@ class Neuron:
         A = self.forward_prop(X)
         a = np.where(A <= 0.5, 0, 1)
         return A, self.cost(Y, A)
-

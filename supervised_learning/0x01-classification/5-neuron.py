@@ -40,7 +40,8 @@ class Neuron:
     def cost(self, Y, A):
         '''Calculates the cost of the model using logistic regression'''
         m = Y.shape[1]
-        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * (np.log(1.0000001 - A)))
+        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y)
+                               * (np.log(1.0000001 - A)))
         return cost
 
     def evaluate(self, X, Y):
@@ -52,4 +53,3 @@ class Neuron:
     def gradient_descent(self, X, Y, A, alpha=0.05):
         '''Calculates one pass of gradient descent on the neuron'''
         m = Y.shape[1]
-        
