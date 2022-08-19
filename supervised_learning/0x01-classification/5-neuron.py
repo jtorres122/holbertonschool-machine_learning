@@ -42,3 +42,14 @@ class Neuron:
         m = Y.shape[1]
         cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * (np.log(1.0000001 - A)))
         return cost
+
+    def evaluate(self, X, Y):
+        '''Function evaluates the neuron's predictions'''
+        A = self.forward_prop(X)
+        a = np.where(A <= 0.5, 0, 1)
+        return A, self.cost(Y, A)
+
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        '''Calculates one pass of gradient descent on the neuron'''
+        m = Y.shape[1]
+        
