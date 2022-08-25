@@ -7,6 +7,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 ### General
 
 - What is a model?
+  - The combination of input data(training data) and a ML algorithm
 - What is supervised learning?
 - What is a prediction?
 - What is a node?
