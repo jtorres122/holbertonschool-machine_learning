@@ -3,8 +3,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow.compat.v1 as tf
+tf.get_logger().setLevel('ERROR')
 tf.disable_eager_execution()
 evaluate = __import__('7-evaluate').evaluate
+
 
 def one_hot(Y, classes):
     """convert an array to a one-hot matrix"""
@@ -12,8 +14,9 @@ def one_hot(Y, classes):
     one_hot[np.arange(Y.shape[0]), Y] = 1
     return one_hot
 
+
 if __name__ == '__main__':
-    lib= np.load('../data/MNIST.npz')
+    lib = np.load('../data/MNIST.npz')
     X_test_3D = lib['X_test']
     Y_test = lib['Y_test']
     X_test = X_test_3D.reshape((X_test_3D.shape[0], -1))

@@ -2,8 +2,10 @@
 
 import numpy as np
 import tensorflow.compat.v1 as tf
+tf.get_logger().setLevel('ERROR')
 tf.disable_eager_execution()
 train = __import__('6-train').train
+
 
 def one_hot(Y, classes):
     """convert an array to a one-hot matrix"""
@@ -11,8 +13,9 @@ def one_hot(Y, classes):
     one_hot[np.arange(Y.shape[0]), Y] = 1
     return one_hot
 
+
 if __name__ == '__main__':
-    lib= np.load('../data/MNIST.npz')
+    lib = np.load('../data/MNIST.npz')
     X_train_3D = lib['X_train']
     Y_train = lib['Y_train']
     X_train = X_train_3D.reshape((X_train_3D.shape[0], -1))
