@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''Module contains the calculate _accuracy function'''
+'''Module contains the calculate_accuracy function'''
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
