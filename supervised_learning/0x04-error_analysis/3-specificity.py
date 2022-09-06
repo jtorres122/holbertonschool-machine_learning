@@ -21,4 +21,3 @@ def specificity(confusion):
     N = TN + FP
 
     return TN / N
-
