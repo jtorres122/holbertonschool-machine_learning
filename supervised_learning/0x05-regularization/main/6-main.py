@@ -2,6 +2,7 @@
 
 import numpy as np
 import tensorflow.compat.v1 as tf
+tf.get_logger().setLevel('ERROR')
 tf.disable_eager_execution()
 dropout_create_layer = __import__('6-dropout_create_layer').dropout_create_layer
 
