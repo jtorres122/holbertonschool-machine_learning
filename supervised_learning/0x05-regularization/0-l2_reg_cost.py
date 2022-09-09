@@ -7,7 +7,6 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     '''Function calculates the cost of a NN with L2 regularization'''
 
     norm = 0
-    print(weights.keys())
     for w in weights.keys():
         norm += np.linalg.norm(weights[w]) ** 2
 
