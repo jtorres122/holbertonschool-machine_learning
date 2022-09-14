@@ -9,18 +9,20 @@ def train_model(network, data, labels, batch_size, epochs,
                 decay_rate=1, verbose=True, shuffle=False):
     '''Function trains a model using mini-batch gradient descent'''
 
-    if validation_data and learning_rate_decay:
-        def scheduler(epoch):
-            '''
-            gets the learning rate of each epoch
-            :epoch: is the current epoch
-            '''
-            return alpha / (1 + decay_rate * epoch)
+    def scheduler(epoch):
+        '''
+        gets the learning rate of each epoch
+        :epoch: is the current epoch
+        '''
+        return alpha / (1 + decay_rate * epoch)
 
+    if validation_data:
         callbacks = []
-        callbacks.append(K.callbacks.EarlyStopping(patience=patience))
-        callbacks.append(K.callbacks.LearningRateScheduler(
-                         scheduler, verbose=1))
+        if early_stopping:
+            callbacks.append(K.callbacks.EarlyStopping(patience=patience))
+        if learning_rate_decay:
+            callbacks.append(K.callbacks.LearningRateScheduler(
+                             scheduler, verbose=1))
         return network.fit(x=data, y=labels, batch_size=batch_size,
                            epochs=epochs, callbacks=[callbacks],
                            validation_data=validation_data,
