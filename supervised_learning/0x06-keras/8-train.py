@@ -25,7 +25,7 @@ def train_model(network, data, labels, batch_size, epochs,
             callbacks.append(K.callbacks.LearningRateScheduler(
                              scheduler, verbose=1))
         if save_best:
-            callbacks.append(K.callbacks.ModelCheckpoint(filepath=filepath))
+            callbacks.append(K.callbacks.ModelCheckpoint(filepath=filepath, save_best_only=True))
         return network.fit(x=data, y=labels, batch_size=batch_size,
                            epochs=epochs, callbacks=[callbacks],
                            validation_data=validation_data,
