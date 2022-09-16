@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''Module contains convolve_grayscale_valid function'''
 import numpy as np
 
