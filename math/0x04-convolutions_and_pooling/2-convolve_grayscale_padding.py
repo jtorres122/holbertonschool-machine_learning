@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-'''Module contains convolve_grayscale_same function'''
+'''Module contains convolve_grayscale_padding function'''
 import numpy as np
 
 
-def convolve_grayscale_same(images, kernel):
-    '''Function performs a same convolution on grayscale images'''
+def convolve_grayscale_padding(images, kernel, padding):
+    '''
+    Function performs a convolution on grayscale
+    images with custom padding
+    '''
+    m, h, w = images.shape
     kh, kw = kernel.shape
 
-    ph = int(np.ceil((kh - 1) / 2))
-    pw = int(np.ceil((kw - 1) / 2))
+    ph = padding[0]
+    pw = padding[1]
 
-    conv_img = np.zeros(images.shape)
+    oh = h + 2 * ph - kh + 1
+    ow = w + 2 * pw - kw + 1
+    conv_img = np.zeros((m, oh, ow))
 
     padded_imgs = np.pad(images, pad_width=((0, 0), (ph, ph), (pw, pw)),
                          mode='constant')
