@@ -15,7 +15,7 @@ def convolve_grayscale_valid(images, kernel):
 
     for y in range(conv_h):
         for x in range(conv_w):
-            img_slice = images[:, y:y + kh, x:x + kw]
+            img_slice = images[:, y:(y + kh), x:(x + kw)]
             conv_img[:, y, x] = np.tensordot(img_slice, kernel)
 
     return conv_img
