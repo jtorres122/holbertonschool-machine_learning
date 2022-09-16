@@ -4,7 +4,7 @@ import numpy as np
 
 
 def convolve(images, kernels, padding='same', stride=(1, 1)):
-    '''Function performs a convolution on images with channels'''
+    '''Function performs a convolution on images using multiple kernels'''
     m, h, w, c = images.shape
     kh, kw, c, nc = kernels.shape
     sh, sw = stride
