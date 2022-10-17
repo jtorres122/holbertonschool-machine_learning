@@ -26,8 +26,7 @@ class Yolo():
         boxes = []
         box_conf = []
         box_class = []
-        boxes = [output[:, :, :, 0:4] for output in outputs]
-        for oidx, output in enumerate(boxes):
+        for oidx, output in enumerate(outputs):
             for y in range(output.shape[0]):
                 for x in range(output.shape[1]):
                     c_y = ((self.sigmoid(output[y, x, :, 1]) + y)
