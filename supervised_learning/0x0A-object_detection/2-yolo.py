@@ -52,17 +52,22 @@ class Yolo():
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         '''Method filters boxes'''
-        shape_boxes = np.concatenate([box.reshape(-1, 4) for box in boxes])
-        shape_prob = np.concatenate([b.reshape(-1, 80) for b in
-                                    box_class_probs])
-        shape_conf = np.concatenate([b.reshape(-1) for b in box_confidences])
-
-        final_class = np.argmax(shape_prob, axis=1)
-        final_conf = shape_conf * shape_prob.max(axis=1)
-        rm = np.where(final_conf < self.class_t)
-
-        shape_boxes = np.delete(shape_boxes, rm, axis=0)
-        final_conf = np.delete(final_conf, rm)
-        final_class = np.delete(final_class, rm)
-
-        return (shape_boxes, final_class, final_conf)
+        box_score = []
+        bc = box_confidences
+        bcp = box_class_probs
+        for box_conf, box_probs in zip(bc, bcp):
+            score = (box_conf * box_probs)
+            box_score.append(score)
+        box_classes = [s.argmax(axis=-1) for s in box_score]
+        box_class_l = [b.reshape(-1) for b in box_classes]
+        box_classes = np.concatenate(box_class_l)
+        box_class_scores = [s.max(axis=-1) for s in box_score]
+        b_scores_l = [b.reshape(-1) for b in box_class_scores]
+        box_class_scores = np.concatenate(b_scores_l)
+        mask = np.where(box_class_scores >= self.class_t)
+        boxes_all = [b.reshape(-1, 4) for b in boxes]
+        boxes_all = np.concatenate(boxes_all)
+        scores = box_class_scores[mask]
+        boxes = boxes_all[mask]
+        classes = box_classes[mask]
+        return (boxes, classes, scores)

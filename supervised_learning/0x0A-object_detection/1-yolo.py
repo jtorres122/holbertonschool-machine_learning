@@ -23,28 +23,28 @@ class Yolo():
 
     def process_outputs(self, outputs, image_size):
         '''Method processes outputs'''
-        boxes = []
-        box_conf = []
-        box_class = []
-        for oidx, output in enumerate(outputs):
-            for y in range(output.shape[0]):
-                for x in range(output.shape[1]):
-                    c_y = ((self.sigmoid(output[y, x, :, 1]) + y)
-                           / output.shape[0] * image_size[0])
-                    c_x = ((self.sigmoid(output[y, x, :, 0]) + x)
-                           / output.shape[1] * image_size[1])
-                    resize = self.anchors[oidx].astype(float)
-                    resize[:, 0] *= (np.exp(output[y, x, :, 2])
-                                     / 2 * image_size[1] /
-                                     self.model.input.shape[1])
-                    resize[:, 1] *= (np.exp(output[y, x, :, 3])
-                                     / 2 * image_size[0] /
-                                     self.model.input.shape[2])
-                    output[y, x, :, 0] = c_x - resize[:, 0]
-                    output[y, x, :, 1] = c_y - resize[:, 1]
-                    output[y, x, :, 2] = c_x + resize[:, 0]
-                    output[y, x, :, 3] = c_y + resize[:, 1]
-        for output in outputs:
-            box_conf.append(self.sigmoid(output[..., 4, np.newaxis]))
-            box_class.append(self.sigmoid(output[..., 5:]))
-        return (boxes, box_conf, box_class)
+        boxes = [pred[:, :, :, 0:4] for pred in outputs]
+        for ipred, pred in enumerate(boxes):
+            for grid_h in range(pred.shape[0]):
+                for grid_w in range(pred.shape[1]):
+                    bx = ((self.sigmoid(pred[grid_h, grid_w, :, 0]) + grid_w)
+                          / pred.shape[1])
+                    by = ((self.sigmoid(pred[grid_h, grid_w, :, 1]) + grid_h)
+                          / pred.shape[0])
+                    anchor_tensor = self.anchors[ipred].astype(float)
+                    anchor_tensor[:, 0] *= np.exp(pred[grid_h, grid_w, :, 2])\
+                        / self.model.input.shape[1].value
+                    anchor_tensor[:, 1] *= np.exp(pred[grid_h, grid_w, :, 3])\
+                        / self.model.input.shape[2].value
+                    pred[grid_h, grid_w, :, 0] = (bx - (anchor_tensor[:, 0] /
+                                                  2)) * image_size[1]
+                    pred[grid_h, grid_w, :, 1] = (by - (anchor_tensor[:, 1] /
+                                                  2)) * image_size[0]
+                    pred[grid_h, grid_w, :, 2] = (bx + (anchor_tensor[:, 0] /
+                                                  2)) * image_size[1]
+                    pred[grid_h, grid_w, :, 3] = (by + (anchor_tensor[:, 1] /
+                                                  2)) * image_size[0]
+        box_confidences = [self.sigmoid(pred[:, :, :, 4:5]) for pred in
+                           outputs]
+        box_class_probs = [self.sigmoid(pred[:, :, :, 5:]) for pred in outputs]
+        return (boxes, box_confidences, box_class_probs)
