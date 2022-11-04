@@ -32,11 +32,14 @@ def minor(matrix):
 
 def determinant(matrix):
     '''Function calculates the determinant of a matrix'''
+    det = 0
     if matrix == [[]]:
         return 1
     if len(matrix) == 1:
         return matrix[0][0]
-    det = 0
+    if len(matrix) == 2:
+        det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+        return det
     for x, num in enumerate(matrix):
         temp = []
         P = matrix[0][x]
