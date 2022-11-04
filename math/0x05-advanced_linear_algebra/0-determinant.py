@@ -16,8 +16,8 @@ def determinant(matrix):
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a square matrix")
     if len(matrix) == 2:
-        det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
-        return det
+        x = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+        return x
     for x, num in enumerate(matrix):
         temp = []
         P = matrix[0][x]
