@@ -24,14 +24,14 @@ def adjugate(matrix):
 
 def minor(matrix):
     '''Function calculates the minor matrix of a matrix'''
-    if len(matrix) == 1:
-        return [[1]]
     if not isinstance(matrix, list) or matrix == []:
         raise TypeError('matrix must be a list of lists')
     if any(not isinstance(row, list) for row in matrix):
         raise TypeError('matrix must be a list of lists')
     if any(len(row) != len(matrix) for row in matrix):
         raise ValueError('matrix must be a non-empty square matrix')
+    if len(matrix) == 1:
+        return [[1]]
     mino = []
     for x in range(len(matrix)):
         t = []
@@ -39,8 +39,7 @@ def minor(matrix):
             s = []
             for row in (matrix[:x] + matrix[x + 1:]):
                 s.append(row[:y] + row[y + 1:])
-            sign = (-1) ** ((x + y) % 2)
-            t.append(determinant(s) * sign)
+            t.append(determinant(s))
         mino.append(t)
     return mino
 
