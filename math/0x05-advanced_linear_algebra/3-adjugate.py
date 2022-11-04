@@ -24,7 +24,6 @@ def minor(matrix):
     if len(matrix) == 1:
         return [[1]]
     mino = []
-    mino = []
     for x in range(len(matrix)):
         t = []
         for y in range(len(matrix[0])):
