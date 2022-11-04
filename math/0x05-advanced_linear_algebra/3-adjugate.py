@@ -39,21 +39,19 @@ def minor(matrix):
 def determinant(matrix):
     '''Function calculates the determinant of a matrix'''
     det = 0
-    if matrix == [[]]:
-        return 1
     if len(matrix) == 1:
         return matrix[0][0]
     if len(matrix) == 2:
         det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
         return det
-    for x, num in enumerate(matrix):
+    for x, num in enumerate(matrix[0]):
+        row = [r for r in matrix[1:]]
         temp = []
-        P = matrix[0][x]
-        for row in matrix[1:]:
-            new = []
-            for j in range(len(matrix)):
-                if j != x:
-                    new.append(row[j])
-            temp.append(new)
-        det += P * determinant(temp) * (-1) ** x
+        for r in row:
+            a = []
+            for c in range(len(matrix)):
+                if c != x:
+                    a.append(r[c])
+            temp.append(a)
+        det += num * (-1) ** x * determinant(temp)
     return det
