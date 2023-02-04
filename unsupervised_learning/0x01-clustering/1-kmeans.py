@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+'''Module contains kmeans(X, k, iterations=1000) function'''
+import numpy as np
+
+
+def kmeans(X, k, iterations=1000):
+    '''Function performs K-means on a dataset'''
+    if type(k) is not int or k <= 0:
+        return None, None
+    if type(X) is not np.ndarray or len(X.shape) != 2:
+        return None, None
+    if type(iterations) is not int or iterations <= 0:
+        return None, None
+    n, d = X.shape
+    centroids = np.random.uniform(
+        low=np.min(X, axis=0),
+        high=np.max(X, axis=0),
+        size=(k, d)
+    )
+    classes = np.zeros(X.shape[0])
+    for i in range(iterations):
+        temp = centroids.copy()
+        distances = np.sum(np.square(X - centroids[:, np.newaxis]), axis=2)
+        classes = np.argmin(distances, axis=0)
+        for j in range(k):
+            if len(X[classes == j]) == 0:
+                centroids[j] = np.random.uniform(
+                                low=np.min(X, axis=0),
+                                high=np.max(X, axis=0),
+                                size=(1, d))
+            else:
+                centroids[j] = np.mean(X[classes == j], axis=0)
+        distances = np.sum(np.square(X - centroids[:, np.newaxis]), axis=2)
+        classes = np.argmin(distances, axis=0)
+        if np.all(centroids == temp):
+            return centroids, classes
+    return centroids, classes
