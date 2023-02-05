@@ -8,31 +8,28 @@ maximization = __import__('7-maximization').maximization
 
 def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     '''Function performs the expectation maximization for a GMM'''
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None, None, None, None
-    if type(k) != int or k <= 0 or X.shape[0] < k:
-        return None, None, None, None, None
-    if type(iterations) != int or iterations <= 0:
-        return None, None, None, None, None
-    if type(tol) != float or tol < 0:
-        return None, None, None, None, None
-    if type(verbose) != bool:
-        return None, None, None, None, None
+    if type(X) is not np.ndarray or len(X.shape) != 2:
+        return (None, None, None, None, None)
+    if type(k) is not int or type(iterations) is not int:
+        return (None, None, None, None, None)
+    if k <= 0 or iterations <= 0:
+        return (None, None, None, None, None)
+    if type(tol) is not float or tol < 0:
+        return (None, None, None, None, None)
+    if type(verbose) is not bool:
+        return (None, None, None, None, None)
     pi, m, S = initialize(X, k)
-    loglikelihood = 0
-    i = 0
-    while i < iterations:
-        g, loglikelihood_new = expectation(X, pi, m, S)
-        if verbose is True and (i % 10 == 0):
-            print('Log Likelihood after {} iterations: {}'.format(
-                i, loglikelihood_new.round(5)))
-        if abs(loglikelihood_new - loglikelihood) <= tol:
-            break
+    g, ll = expectation(X, pi, m, S)
+    ll_old = 0
+    text = 'Log Likelihood after {} iterations: {}'
+    for i in range(iterations):
+        if verbose and i % 10 == 0:
+            print(text.format(i, ll.round(5)))
         pi, m, S = maximization(X, g)
-        i += 1
-        loglikelihood = loglikelihood_new
-    g, loglikelihood_new = expectation(X, pi, m, S)
-    if verbose is True:
-        print('Log Likelihood after {} iterations: {}'.format(
-            i, loglikelihood_new.round(5)))
-    return pi, m, S, g, loglikelihood_new
+        g, ll = expectation(X, pi, m, S)
+        if np.abs(ll_old - ll) <= tol:
+            break
+        ll_old = ll
+    if verbose:
+        print(text.format(i + 1, ll.round(5)))
+    return (pi, m, S, g, ll)
